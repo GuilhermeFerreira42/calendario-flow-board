@@ -4,7 +4,6 @@ import { useBoardStore } from '@/store/BoardStore';
 import ListContainer from './ListContainer';
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 const Board = () => {
   const { boards, activeBoardId, addList } = useBoardStore();
@@ -33,9 +32,9 @@ const Board = () => {
         <h2 className="font-semibold text-lg">{activeBoard.title}</h2>
       </div>
       
-      <ScrollArea className="h-[calc(100vh-96px)]">
-        <div className="p-4">
-          <div className="flex space-x-4 min-w-full" style={{ minWidth: '100vw' }}>
+      <div className="overflow-x-auto overflow-y-hidden h-[calc(100vh-96px)] board-scrollbar">
+        <div className="p-4 min-w-full">
+          <div className="flex space-x-4" style={{ minWidth: 'max-content', paddingBottom: '16px' }}>
             {activeBoard.lists.map((list) => (
               <ListContainer key={list.id} list={list} boardId={activeBoard.id} />
             ))}
@@ -49,7 +48,7 @@ const Board = () => {
             </Button>
           </div>
         </div>
-      </ScrollArea>
+      </div>
     </div>
   );
 };
