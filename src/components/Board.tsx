@@ -4,6 +4,7 @@ import { useBoardStore } from '@/store/BoardStore';
 import ListContainer from './ListContainer';
 import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 const Board = () => {
   const { boards, activeBoardId, addList } = useBoardStore();
@@ -32,21 +33,23 @@ const Board = () => {
         <h2 className="font-semibold text-lg">{activeBoard.title}</h2>
       </div>
       
-      <div className="p-4 overflow-x-auto h-[calc(100vh-96px)] board-scrollbar">
-        <div className="flex space-x-4 h-full">
-          {activeBoard.lists.map((list) => (
-            <ListContainer key={list.id} list={list} boardId={activeBoard.id} />
-          ))}
-          
-          <Button
-            onClick={handleAddList}
-            className="list-container flex items-center justify-center border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 text-gray-500 h-16"
-          >
-            <Plus className="mr-2 h-5 w-5" />
-            Adicionar outra lista
-          </Button>
+      <ScrollArea className="h-[calc(100vh-96px)]">
+        <div className="p-4">
+          <div className="flex space-x-4 min-w-full" style={{ minWidth: '100vw' }}>
+            {activeBoard.lists.map((list) => (
+              <ListContainer key={list.id} list={list} boardId={activeBoard.id} />
+            ))}
+            
+            <Button
+              onClick={handleAddList}
+              className="list-container flex items-center justify-center border-2 border-dashed border-gray-300 bg-gray-50 hover:bg-gray-100 text-gray-500 h-16"
+            >
+              <Plus className="mr-2 h-5 w-5" />
+              Adicionar outra lista
+            </Button>
+          </div>
         </div>
-      </div>
+      </ScrollArea>
     </div>
   );
 };

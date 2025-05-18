@@ -9,7 +9,7 @@ const CreateButton = () => {
   const { addBoard } = useBoardStore();
   
   const handleCreateBoard = () => {
-    const boardName = `Novo Quadro ${new Date().toLocaleDateString()}`;
+    const boardName = `Novo Quadro ${new Date().toLocaleDateString('pt-BR')}`;
     addBoard(boardName);
     toast.success('Novo quadro criado com sucesso!');
   };
